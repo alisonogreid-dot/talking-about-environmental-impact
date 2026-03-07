@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Talk About Environmental Impact — Vanishing Points Week 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D1117;
+  --surface: #161B22;
+  --surface2: #1C2333;
+  --border: rgba(255,255,255,0.06);
+  --text: #E6EDF3;
+  --muted: #8B949E;
+  --accent: #C9553D;
+  --accent-glow: rgba(201,85,61,0.15);
+  --teal: #2A9D8F;
+  --teal-glow: rgba(42,157,143,0.12);
+  --sand: #E9C46A;
+  --sand-glow: rgba(233,196,106,0.1);
+  --navy: #264653;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === HERO === */
+.hero {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 30% 50%, rgba(42,157,143,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(201,85,61,0.06) 0%, transparent 60%);
+}
+
+.hero::before {
+  content: '🌊';
+  position: absolute;
+  font-size: clamp(6rem, 18vw, 14rem);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 600px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === LAYOUT === */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+section + section {
+  border-top: 1px solid var(--border);
+}
+
+/* === TYPOGRAPHY === */
+h2 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+h2 .num {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+h3 {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+}
+
+p {
+  margin-bottom: 1.2rem;
+  color: var(--muted);
+}
+
+p strong { color: var(--text); font-weight: 600; }
+
+/* === META BAR === */
+.meta-bar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.92rem;
+}
+
+.meta-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  align-self: center;
+}
+
+.meta-value {
+  color: var(--muted);
+}
+
+/* === DAY DIVIDER === */
+.day-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 3rem 0 2rem;
+}
+
+.day-divider .day-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--teal);
+  padding: 0.35rem 1rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.day-divider .day-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* === DEFINITION BOX === */
+.definition-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 2rem 2.5rem;
+  margin: 2rem 0;
+}
+
+.definition-box .term {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.definition-box .etymology {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.definition-box p { color: var(--text); margin-bottom: 0.8rem; }
+
+/* === DISTINCTION / CALLOUT BOX === */
+.distinction {
+  background: linear-gradient(135deg, rgba(201,85,61,0.08), rgba(201,85,61,0.03));
+  border: 1px solid rgba(201,85,61,0.2);
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+}
+
+.distinction .label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* === TEAL CALLOUT === */
+.teal-callout {
+  background: linear-gradient(135deg, rgba(42,157,143,0.08), rgba(42,157,143,0.03));
+  border: 1px solid rgba(42,157,143,0.2);
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+}
+
+.teal-callout .label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+
+/* === SAND CALLOUT (what's left out style) === */
+.sand-callout {
+  background: linear-gradient(135deg, rgba(233,196,106,0.06), rgba(233,196,106,0.02));
+  border: 1px solid rgba(233,196,106,0.2);
+  border-radius: 12px;
+  padding: 2rem 2.25rem;
+  margin: 2.5rem 0;
+}
+
+.sand-callout .label {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sand);
+  margin-bottom: 0.75rem;
+}
+
+/* === CASE STUDY BOX === */
+.case-study {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+}
+
+.case-study .cs-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 0.5rem;
+}
+
+.case-study .cs-title {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+/* === TABLE === */
+.impact-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.impact-table thead th {
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+}
+
+.impact-table tbody td {
+  padding: 0.85rem 1.2rem;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  vertical-align: top;
+}
+
+.impact-table tbody tr:last-child td { border-bottom: none; }
+.impact-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+.impact-table td strong { color: var(--text); }
+.impact-table td em { color: var(--sand); font-style: normal; }
+
+/* === TASK SECTION (expandable) === */
+.task-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.task-header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.task-header:hover { background: rgba(255,255,255,0.02); }
+
+.task-level {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.task-level.wed { background: rgba(42,157,143,0.15); color: var(--teal); }
+.task-level.thu { background: rgba(233,196,106,0.15); color: var(--sand); }
+
+.task-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  flex: 1;
+}
+
+.task-arrow {
+  color: var(--muted);
+  font-size: 0.85rem;
+  transition: transform 0.3s;
+}
+
+.task-section.open .task-arrow { transform: rotate(180deg); }
+
+.task-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.task-section.open .task-body { max-height: 3000px; }
+
+.task-body-inner {
+  padding: 0 2rem 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.task-body-inner h4 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--teal);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.task-body-inner ol, .task-body-inner ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.task-body-inner li {
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.task-body-inner li strong { color: var(--text); }
+
+/* === SCAFFOLD === */
+.scaffold {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  margin: 1.25rem 0;
+}
+
+.scaffold .sc-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 0.75rem;
+}
+
+.scaffold ol li {
+  font-size: 0.92rem;
+  margin-bottom: 0.6rem;
+}
+
+/* === SOURCE LINK === */
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--teal);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  background: var(--teal-glow);
+  border-radius: 6px;
+  margin: 0.25rem 0.25rem 0.25rem 0;
+  transition: background 0.2s;
+}
+
+.source-link:hover { background: rgba(42,157,143,0.2); }
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--border);
+}
+
+footer p {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  .container { padding: 0 1.25rem; }
+  .hero { padding: 3rem 1.5rem; min-height: 45vh; }
+  .definition-box, .case-study, .sand-callout { padding: 1.5rem; }
+  .task-header { padding: 1.25rem 1.5rem; }
+  .task-body-inner { padding: 0 1.5rem 1.5rem; }
+  .impact-table { font-size: 0.85rem; }
+  .impact-table thead th, .impact-table tbody td { padding: 0.7rem 0.8rem; }
+  .meta-bar { grid-template-columns: 1fr; gap: 0.3rem 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Vanishing Points · MYP5 I&S · Week 1 · Double 1</div>
+  <h1>How Do We <em>Talk About</em> Environmental Impact?</h1>
+  <p class="hero-sub">Every environmental story has a villain, a victim, and a voice telling the story. This week we start noticing who's talking — and what they leave out.</p>
+</header>
+
+<!-- SECTION 1: OVERVIEW -->
+<section>
+  <div class="container">
+    <div class="meta-bar">
+      <span class="meta-label">Content</span>
+      <span class="meta-value">What is the role humans have played in environmental damage?</span>
+      <span class="meta-label">Skills</span>
+      <span class="meta-value">Using lenses to view things at different levels (individual, local, global)</span>
+      <span class="meta-label">Sessions</span>
+      <span class="meta-value">Wednesday &amp; Thursday — Provocation, Case Study, Counterfactual</span>
+    </div>
+
+    <h2><span class="num">01</span>The Lorax as Provocation</h2>
+
+    <p>We begin with a story that picks a side. Dr. Seuss didn't write <em>The Lorax</em> as a balanced report — he wrote it to make you <strong>feel</strong> something about trees, responsibility, and the cost of ignoring warnings. That makes it a very specific kind of text: one that uses <strong>narrative</strong> (story, characters, emotion) to argue a point.</p>
+
+    <p>As you watch, pay attention not just to <em>what happens</em> but to <strong>how the story makes you feel about what happens</strong>. Who does the story want you to blame? Who does it want you to sympathise with? These choices are deliberate.</p>
+
+    <div class="distinction">
+      <div class="label">Keep This in Mind</div>
+      <p><strong>The Lorax is one-sided on purpose.</strong> The Once-ler has economic reasons for what he does — but the story doesn't give those reasons any respect. That's not a flaw. It's a rhetorical choice. By the end of this unit, you'll know the name for this kind of writing and you'll be able to do it yourself.</p>
+    </div>
+
+    <!-- TASK: LORAX -->
+    <div class="task-section" onclick="toggleTask(this)">
+      <div class="task-header">
+        <span class="task-level wed">Wednesday</span>
+        <span class="task-title">The Lorax — Provocation Tasks</span>
+        <span class="task-arrow">▼</span>
+      </div>
+      <div class="task-body"><div class="task-body-inner">
+        <p>Watch the clip of <em>The Lorax</em>, then complete all three tasks below.</p>
+
+        <h4>Task 1: Perspectives</h4>
+        <ol>
+          <li><strong>Identify</strong> at least two perspectives on display in the clip.</li>
+          <li><strong>Describe</strong> the conflict between these perspectives.</li>
+          <li>Who is responsible for the trees? Is there a clear <strong>villain</strong>? What makes them the villain — their actions, their attitude, or the way the story presents them?</li>
+        </ol>
+
+        <h4>Task 2: The 3Ys</h4>
+        <p>Use the 3Ys thinking routine to consider the themes from the clip:</p>
+        <ol>
+          <li><strong>Why does this matter to me?</strong> (individual level)</li>
+          <li><strong>Why does this matter to the people around me?</strong> (local level)</li>
+          <li><strong>Why does this matter to the world?</strong> (global level)</li>
+        </ol>
+        <p>These three lenses — individual, local, global — will appear throughout this unit. Get used to them.</p>
+
+        <h4>Task 3: Reflection</h4>
+        <p>Based on the unit title (<em>Vanishing Points</em>) and the inquiry question (<em>How do we talk about environmental impact?</em>), why do you think this clip was chosen to open the unit? Think about the <strong>story</strong> the clip tells, not just the facts it presents.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: ARAL SEA -->
+<section>
+  <div class="container">
+    <h2><span class="num">02</span>From Fiction to Reality: The Aral Sea</h2>
+
+    <p>The Lorax is fiction. But the pattern it shows — people making decisions about resources, consequences building up, warnings ignored — has played out in the real world, sometimes at staggering scale.</p>
+
+    <div class="case-study">
+      <div class="cs-label">Case Study</div>
+      <div class="cs-title">The Aral Sea</div>
+      <p>The Aral Sea was once the world's fourth-largest freshwater lake. Beginning in the 1960s, the Soviet Union diverted rivers feeding the lake to irrigate cotton fields in Central Asia. The <strong>decision</strong> was made by a centralised government, thousands of kilometres away, for economic reasons. The people who lived near the lake had no say.</p>
+      <p>The lake shrank to <strong>10% of its original size</strong>. Salinity rose from 10 g/l to over 100 g/l. Fish died. Toxic sediments, previously underwater, became exposed and blew across communities. The local climate changed. Biodiversity collapsed. Livelihoods built around fishing and agriculture disappeared.</p>
+      <p>International collaborations are now working to restore water flows and introduce sustainable land management — but the damage took decades and a complete political system change to even begin addressing.</p>
+    </div>
+
+    <div class="teal-callout">
+      <div class="label">Notice the Pattern</div>
+      <p><strong>Who made the decision?</strong> A distant government. <strong>Who suffered the consequences?</strong> Local communities. <strong>Who had the power to stop it?</strong> That's a governance question — and it's one we'll keep returning to throughout this unit.</p>
+    </div>
+
+    <!-- TASK: ARAL SEA T-CHART -->
+    <div class="task-section" onclick="toggleTask(this)">
+      <div class="task-header">
+        <span class="task-level wed">Wednesday</span>
+        <span class="task-title">T-Chart: Initial Impacts → Further Impacts</span>
+        <span class="task-arrow">▼</span>
+      </div>
+      <div class="task-body"><div class="task-body-inner">
+        <p>Create a T-chart showing the chain of consequences. The left column shows <strong>initial impacts</strong> of the water diversion; the right column shows the <strong>further impacts</strong> that followed.</p>
+
+        <p>Here's one example to get you started:</p>
+
+        <table class="impact-table">
+          <thead>
+            <tr><th>Initial Impact</th><th>Further Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Salinity rose</strong> from 10 g/l to over 100 g/l</td>
+              <td>Fish populations collapsed → fishing industry destroyed → unemployment and food insecurity</td>
+            </tr>
+            <tr>
+              <td>Your turn…</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Add at least <strong>three more rows</strong>. Think across the individual, local, and global lenses.</p>
+
+        <div class="scaffold">
+          <div class="sc-label">Thinking prompt</div>
+          <p style="margin-bottom: 0;">As you build your T-chart, consider: <strong>who is the villain of the Aral Sea story?</strong> Is it the engineers who built the canals? The Soviet government that ordered the project? The global demand for cheap cotton? The answer depends on who's telling the story — and that's exactly the point.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- REFLECTION: LORAX ↔ ARAL SEA -->
+    <div class="task-section" onclick="toggleTask(this)">
+      <div class="task-header">
+        <span class="task-level wed">Wednesday</span>
+        <span class="task-title">Connecting Fiction and Reality</span>
+        <span class="task-arrow">▼</span>
+      </div>
+      <div class="task-body"><div class="task-body-inner">
+        <p><strong>Reflect:</strong> To what extent are there similarities between the fictional world of <em>The Lorax</em> and the real-world example of the Aral Sea?</p>
+        <p>Think about: the role of economic motivation, the presence (or absence) of warnings, who had power, who suffered, and <strong>how the story is told</strong>. The Lorax has a clear villain — does the Aral Sea?</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: THURSDAY — COUNTERFACTUAL + EASTER ISLAND PROVOCATION -->
+<section>
+  <div class="container">
+    <div class="day-divider">
+      <span class="day-tag">Thursday</span>
+      <span class="day-line"></span>
+    </div>
+
+    <h2><span class="num">03</span>What If…? The Aral Sea Counterfactual</h2>
+
+    <p>A <strong>counterfactual</strong> asks: what if a key decision had been different? It's a way of testing whether the outcome was inevitable or whether it was the result of specific choices by specific people (or governments, or systems).</p>
+
+    <p>This matters because if the Aral Sea disaster was the result of <strong>decisions</strong>, then different decisions could have prevented it. And if different decisions could have prevented it, then we can ask: <strong>what kind of governance, rules, or power structures would have led to those better decisions?</strong></p>
+
+    <div class="task-section" onclick="toggleTask(this)">
+      <div class="task-header">
+        <span class="task-level thu">Thursday</span>
+        <span class="task-title">Aral Sea Counterfactual — Pairs</span>
+        <span class="task-arrow">▼</span>
+      </div>
+      <div class="task-body"><div class="task-body-inner">
+        <p>In pairs, choose <strong>one key turning point</strong> in the Aral Sea story and rewrite the outcome by changing a critical decision or event.</p>
+
+        <h4>Steps</h4>
+        <ol>
+          <li><strong>Identify your turning point.</strong> When was the moment where things could have gone differently? (e.g. the decision to divert the rivers, the scale of irrigation, the lack of environmental monitoring, the political system that prevented local input…)</li>
+          <li><strong>Change the decision.</strong> What happens instead? Be specific — don't just say "they didn't do it." What alternative approach do they take?</li>
+          <li><strong>Trace the consequences.</strong> Use your T-chart from yesterday. Which chain of impacts would be broken or changed? What new outcomes emerge?</li>
+          <li><strong>Justify.</strong> Why is your alternative plausible? What would have needed to be true (politically, economically, socially) for your alternative to happen?</li>
+        </ol>
+
+        <div class="scaffold">
+          <div class="sc-label">Keep it focused</div>
+          <p style="margin-bottom: 0;">This is a 20–25 minute task. You're writing a paragraph or two, not an essay. The goal is to practise thinking about <strong>decisions and their consequences</strong> — the same skill you'll use in a bigger way tomorrow.</p>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: EASTER ISLAND PROVOCATION (CLIFFHANGER) -->
+<section>
+  <div class="container">
+    <h2><span class="num">04</span>A New Case: Easter Island</h2>
+
+    <p>We've looked at a fictional story (<em>The Lorax</em>) and a real one (the Aral Sea). Now we're going to look at a case where <strong>the story itself is contested</strong> — where different people tell completely different versions of what happened, with different villains, different victims, and different morals.</p>
+
+    <p>Before we get into the details tomorrow, let's see what you already think.</p>
+
+    <div class="sand-callout">
+      <div class="label">3, 2, 1 Bridge — Part 1</div>
+      <p>We start this now and <strong>return to it at the end of Friday's lesson</strong>, building a bridge between your prior knowledge and new understanding.</p>
+      <p style="color: var(--text);"><strong>3 — </strong>Identify three thoughts, ideas, or assumptions you have about Easter Island. For example: based on what you know about the fall of empires, what do you predict about Easter Island's history? What assumptions do you have about how people use and manage natural resources?</p>
+      <p style="color: var(--text);"><strong>2 — </strong>State two questions you have about Easter Island (e.g. about power, resources, religion, leadership).</p>
+      <p style="color: var(--text);"><strong>1 — </strong>Can you think of a modern situation that reminds you of Easter Island's challenges? (an analogy)</p>
+    </div>
+
+    <div class="distinction">
+      <div class="label">Tomorrow's Question</div>
+      <p>The Lorax has one story. The Aral Sea, as we've seen, can be told in different ways depending on where you put the blame. Easter Island takes this further: there are <strong>at least three competing narratives</strong> about what happened — and each one has a different villain. Tomorrow, you'll pick one and <strong>tell the story from inside it</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Vanishing Points · MYP5 I&S · Mrs. Øgreid</p>
+</footer>
+
+<script>
+function toggleTask(el) {
+  document.querySelectorAll('.task-section').forEach(t => {
+    if (t !== el) t.classList.remove('open');
+  });
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
